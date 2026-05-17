@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSINT Terminal - Admin Override</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="matrix-overlay"></div>
+
+  <div class="terminal-container wide">
+    <div class="terminal-header" style="background: rgba(255, 0, 60, 0.1); border-color: var(--error);">
+      <span class="glitch" data-text="ADMINISTRATOR OVERRIDE" style="color: var(--error);">ADMINISTRATOR OVERRIDE</span>
+    </div>
+    
+    <div class="terminal-body">
+      <div class="terminal-nav">
+        <span>ADMIN_ROOT: <span id="admin-email" class="typing">...</span></span>
+        <div>
+          <a href="dashboard.html" class="nav-link" style="margin-right: 15px;">[RETURN_TO_GRID]</a>
+          <a href="#" id="btn-logout" class="nav-link">[TERMINATE_SESSION]</a>
+        </div>
+      </div>
+
+      <div id="error-message" class="error-msg hidden"></div>
+      <div id="success-message" class="success-msg hidden"></div>
+      
+      <!-- User Search and Modify Section -->
+      <div style="border: 1px dashed var(--text-dim); padding: 15px; margin-bottom: 20px;">
+        <h3 style="margin-top: 0; margin-bottom: 15px;">> USER_CREDIT_MANAGEMENT_</h3>
+        <form id="admin-search-form" style="display: flex; gap: 10px; align-items: flex-end; margin-bottom: 15px;">
+          <div class="input-group" style="flex: 1; margin: 0;">
+            <label for="search-email">> TARGET_USER_EMAIL_</label>
+            <input type="email" id="search-email" required autocomplete="off" placeholder="agent@network.sys">
+          </div>
+          <button type="submit" id="btn-search-user" class="btn btn-alt" style="height: 40px; margin: 0;">LOCATE_USER</button>
+        </form>
+
+        <div id="user-details-panel" class="hidden" style="background: rgba(0, 255, 65, 0.05); padding: 10px; border: 1px solid var(--text-dim);">
+          <p><strong>UID:</strong> <span id="found-uid"></span></p>
+          <p><strong>EMAIL:</strong> <span id="found-email"></span></p>
+          <p><strong>ROLE:</strong> <span id="found-role"></span></p>
+          <p><strong>CURRENT CREDITS:</strong> <span id="found-credits"></span></p>
+          
+          <div style="display: flex; gap: 10px; margin-top: 15px;">
+            <button id="btn-add-credits" class="btn" style="flex: 1;">[+ADD CREDITS]</button>
+            <button id="btn-remove-credits" class="btn btn-danger" style="flex: 1;">[-REMOVE CREDITS]</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Lookups Section -->
+      <div style="border: 1px dashed var(--text-dim); padding: 15px;">
+        <h3 style="margin-top: 0; margin-bottom: 15px;">> RECENT_GLOBAL_QUERIES_</h3>
+        <button id="btn-refresh-logs" class="btn btn-alt" style="margin-bottom: 10px;">REFRESH_LOGS</button>
+        <div class="list-container" id="lookups-list">
+          <span class="blinking-cursor">AWAITING_DATA</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/admin.js"></script>
+  <script src="js/matrix.js"></script>
+</body>
+</html>
