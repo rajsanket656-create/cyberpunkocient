@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "description": "Cyberpunk OSINT Terminal",
   "scripts": {
-    "dev": "serve . -p 3000",
+    "dev": "concurrently \"serve . -p 3000\" \"node proxy.js\"",
+    "serve": "serve . -p 3000",
+    "proxy": "node proxy.js",
     "start": "serve . -p 3000"
   },
   "dependencies": {
     "serve": "^14.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }
