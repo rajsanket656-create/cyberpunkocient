@@ -114,7 +114,7 @@ if (lookupForm) {
       const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
       const lookupUrl = isLocal
         ? `http://localhost:3001/lookup?mobile=${encodeURIComponent(mobileNumber)}`
-        : `https://us-central1-cyberpunkocient.cloudfunctions.net/osintLookup?mobile=${encodeURIComponent(mobileNumber)}`;
+        : `/api/lookup/${encodeURIComponent(mobileNumber)}`;
 
       const response = await fetch(lookupUrl);
 
