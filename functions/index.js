@@ -12,7 +12,7 @@ exports.osintLookup = onRequest({ cors: true }, async (req, res) => {
       return;
     }
 
-    const API_URL = `https://users-xinfo-admin-six.vercel.app/api?key=qwertyuioplk847isuhnsiandj&type=mobile&term=${encodeURIComponent(mobile)}`;
+    const API_URL = `https://numinfo.eu.cc/api/check?apikey=freekeyhostmafia&number=${encodeURIComponent(mobile)}`;
 
     const response = await axios.get(API_URL);
     res.status(200).send(response.data);

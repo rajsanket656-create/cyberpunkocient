@@ -124,14 +124,38 @@ if (lookupForm) {
 
       const data = await response.json();
 
-      // Check for API-level failure
-      if (!data || data.success === false) {
-        throw new Error("API returned failure: " + JSON.stringify(data));
+      // Normalize old vs new API response format
+      let resultData = [];
+      let totalRecords = 0;
+      let isSuccess = false;
+
+      if (data && (data.success !== undefined || data.result !== undefined)) {
+        // Old API format
+        isSuccess = data.success !== false;
+        const rawResult = data?.result?.data;
+        resultData = Array.isArray(rawResult) ? rawResult : [];
+        totalRecords = data?.result?.total_records || resultData.length;
+      } else if (data) {
+        // New API format
+        if (data.status === "error" || data.message === "no data found") {
+          isSuccess = false;
+          resultData = [];
+          totalRecords = 0;
+        } else {
+          isSuccess = true;
+          const records = [];
+          for (let key in data) {
+            if (!isNaN(key) && data[key] !== null && typeof data[key] === 'object') {
+              records.push(data[key]);
+            }
+          }
+          resultData = records;
+          totalRecords = records.length;
+        }
       }
 
-      // Check if actual data exists (data.result.data can be {} when no results)
-      const resultData = data?.result?.data;
-      const isDataArray = Array.isArray(resultData) && resultData.length > 0;
+      // Check if actual data exists
+      const isDataArray = resultData.length > 0;
       if (!isDataArray) {
         // No records found — don't deduct credit
         resultOutput.innerHTML = '';
@@ -161,13 +185,13 @@ if (lookupForm) {
         timestamp: serverTimestamp()
       });
 
-      // Show Result — clean formatted output (resultData & isDataArray already checked above)
+      // Show Result — clean formatted output
       const firstResult = resultData[0];
       const summary = {
-        success: data?.success,
+        success: isSuccess,
         owner: "@Blackhat09090",
         result: {
-          count: data?.result?.total_records
+          count: totalRecords
         }
       };
       const formatted =

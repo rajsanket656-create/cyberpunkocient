@@ -32,7 +32,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  const apiUrl = `https://users-xinfo-admin-six.vercel.app/api?key=qwertyuioplk847isuhnsiandj&type=mobile&term=${encodeURIComponent(mobile)}`;
+  const apiUrl = `https://numinfo.eu.cc/api/check?apikey=freekeyhostmafia&number=${encodeURIComponent(mobile)}`;
   console.log(`[Proxy] Fetching: ${apiUrl}`);
 
   https.get(apiUrl, (apiRes) => {

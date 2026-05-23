@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/lookup/:mobile",
-      "destination": "https://users-xinfo-admin-six.vercel.app/api?key=qwertyuioplk847isuhnsiandj&type=mobile&term=:mobile"
+      "destination": "https://numinfo.eu.cc/api/check?apikey=freekeyhostmafia&number=:mobile"
     }
   ]
 }
